@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		<!--spring配置  -->
+		<context:annotation-config></context:annotation-config>
+		<context:component-scan base-package="com.yztc.hkl.*"></context:component-scan>
+		
+		<!--mybatis配置  -->
+		 <context:property-placeholder location="classpath:myconn.properties"/> 
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${conn.driver}"></property>
+		<property name="url" value="${conn.url}"></property>
+		<property name="username" value="${conn.username}"></property>
+		<property name="password" value="${conn.pwd}"></property>
+		</bean>
+		
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis_cfg.xml"></property>
+		</bean>
+		 <mvc:resources location="/front/js/" mapping="/front/js/**"></mvc:resources> 
+		 <mvc:resources location="/front/upload/" mapping="/front/upload/**"></mvc:resources> 
+		 <mvc:resources location="/front//images/" mapping="/front/images/**"></mvc:resources> 
+		 <mvc:resources location="/front/css/" mapping="/front/css/**"></mvc:resources> 
+		 <mvc:resources location="/front/fonts/" mapping="/front/fonts/**"></mvc:resources> 
+		 <mvc:resources location="/front/files/" mapping="/front/files/**"></mvc:resources> 
+		<!--springmvc配置  -->
+		<mvc:annotation-driven></mvc:annotation-driven> 
+		
+		<!-- <mvc:default-servlet-handler/> -->
+
+		<bean id="irvr" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+		</bean>
+		
+		<!--文件上传  -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> </bean>
+		
+		<!-- 拦截器 -->
+		
+	<!-- 	
+		
+		<bean id="mydate" class="com.yztc.hkl.util.MyDate"></bean>
+		
+		<bean id="myconverter"  class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+		<set>
+		<ref bean="mydate"/>
+		</set>
+		</property>
+		</bean>
+		
+		<mvc:annotation-driven conversion-service="myconverter"></mvc:annotation-driven>
+ -->
+ 
+ 
+ 	 <!-- 事务处理开始 -->
+	 <!-- 准备事务处理对象 -->
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource" ></property>
+	 </bean>
+	 
+	 <tx:annotation-driven />
+	 
+	 <!-- 事务处理结束 -->
+
+ 	
+ 	
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+		<configuration>
+		<mappers>	
+		<mapper resource="com/yztc/hkl/pojo/AdminUser.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/CompanyVip.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/Dept.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/HatArea.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/HatCity.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/HatProvince.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/Menu.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/PersonalVip.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/Priviliage.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/Role.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/TurnImage.xml"/>
+		<mapper resource="com/yztc/hkl/pojo/VipUser.xml"/>
+		</mappers>
+		
+		</configuration>
